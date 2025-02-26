@@ -1,51 +1,41 @@
-/* General Page Styling */
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f8f8f8;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-color: #f0f0f0;
     margin: 0;
 }
 
-/* Wheel Container Styling */
 #wheel-container {
     text-align: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    border-radius: 12px;
-    background-color: white;
-    padding: 30px;
-    width: 400px;
 }
 
-/* Spin Button Styling */
+#wheel {
+    border: 5px solid #333;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
 #spin-button {
-    background-color: #ff9900;
-    color: white;
-    font-size: 18px;
     padding: 15px 30px;
+    font-size: 18px;
+    background-color: #ffcc00;
+    color: white;
     border: none;
-    border-radius: 8px;
-    margin-top: 20px;
+    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 #spin-button:hover {
-    background-color: #ff6600;
+    background-color: #ff9900;
 }
 
-/* Result Display Styling */
 #result {
-    font-size: 18px;
-    margin-top: 20px;
+    font-size: 20px;
     font-weight: bold;
-}
-
-/* Wheel Styling */
-canvas {
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    margin-bottom: 20px;
+    color: #333;
+    margin-top: 20px;
 }
