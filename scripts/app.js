@@ -80,5 +80,8 @@ function determinePrize() {
     resultDiv.innerText = "You won: " + prizes[winningIndex].text;
 }
 
+// Initial draw
 drawWheel();
+
+// Ensure the button calls spinWheel()
 spinButton.addEventListener("click", spinWheel);
