@@ -1,45 +1,58 @@
-// Define the options for the Spin.js spinner
+// Define the prize options (with color and prize name)
+var prizeSegments = [
+    { label: "10% Discount", color: '#ff6666' },
+    { label: "Free Shipping", color: '#66b3ff' },
+    { label: "Buy One Get One Free", color: '#99ff99' },
+    { label: "20% Seasonal Discount", color: '#ffcc66' },
+    { label: "10% Discount", color: '#ff6666' },
+    { label: "Free Shipping", color: '#66b3ff' },
+];
+
+// Initialize Spin.js wheel options
 var opts = {
-    lines: 12, // Number of lines
-    length: 0, // Length of each line
-    width: 10, // Line thickness
-    radius: 30, // Radius of the spinner
-    scale: 1, // Scale of the spinner
-    corners: 1, // Rounding of corners
-    color: '#ff6600', // Spinner color
-    fadeColor: 'transparent', // Fade color of the spinner
-    animation: 'spin', // Spinner animation style
-    speed: 1, // Spinner speed
-    rotate: 0, // Rotation angle of the spinner
-    animationDuration: 2, // Animation duration
-    direction: 1, // Clockwise or counterclockwise direction
-    zIndex: 2e9, // z-index of the spinner
-    top: '50%', // Positioning
-    left: '50%', // Positioning
+    lines: 12, // Number of sections on the wheel
+    length: 20, // Length of each segment
+    width: 30, // Thickness of each segment
+    radius: 150, // Radius of the wheel
+    scale: 1, // Scale of the wheel
+    corners: 1, // Corner radius
+    color: '#f7f7f7', // Default segment color
+    opacity: 0.75, // Opacity of segments
+    rotate: 0, // Starting angle
+    direction: 1, // Rotation direction
+    speed: 1, // Speed of spin
+    animationDuration: 2, // Duration of animation
+    animationType: 'spin', // Spin animation
+    pinning: true, // Pin the wheel to the position
+    pins: 12, // Number of pins on the wheel
+    pinColor: '#000', // Color of the pins
+    drawText: true, // Enable text in segments
+    fontSize: 16, // Font size for segment labels
+    textColor: '#fff', // Text color in segments
+    segments: prizeSegments.map(function (segment) {
+        return {
+            fillStyle: segment.color,
+            text: segment.label,
+        };
+    }),
 };
 
-// Create a spinner instance
-var spinner = new Spinner(opts);
+// Create the spinner
+var spinner = new Spin(opts).spin(document.getElementById('wheel'));
 
-// Get the container element
-var wheelContainer = document.getElementById('wheel');
-
-// Button to start the spin
+// Button functionality to start the spin
 var spinButton = document.getElementById('spin-button');
 spinButton.addEventListener('click', function () {
-    spinner.spin(wheelContainer);
+    spinner.spin(document.getElementById('wheel'));
 
     // Simulate the wheel spinning and stopping
     setTimeout(function () {
         spinner.stop();
-        // Random result generation after the spin stops
-        var resultMessages = [
-            'You won a 10% Discount!',
-            'You won Free Shipping!',
-            'You won Buy One Get One Free!',
-            'You won a 20% Seasonal Discount!',
-        ];
-        var randomResult = resultMessages[Math.floor(Math.random() * resultMessages.length)];
-        document.getElementById('result').innerText = randomResult;
+
+        // Get the result
+        var selectedSegment = prizeSegments[Math.floor(Math.random() * prizeSegments.length)];
+
+        // Show the result in the 'result' div
+        document.getElementById('result').innerText = "You won: " + selectedSegment.label;
     }, 3000); // Stop after 3 seconds
 });
