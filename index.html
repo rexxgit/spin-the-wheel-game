@@ -8,14 +8,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Poppins:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="wheel-container">
-        <div id="wheel"></div>
+    <div id="game-container">
+        <h1>Spin the Wheel & Win Exciting Rewards!</h1>
+
+        <!-- Wheel Wrapper -->
+        <div id="wheel-wrapper">
+            <div id="pointer"></div> <!-- Pointer to indicate stop position -->
+            <canvas id="wheel" width="500" height="500"></canvas>
+        </div>
+
+        <!-- Spin Button -->
         <button id="spin-button">Spin the Wheel</button>
+
+        <!-- Result Display -->
         <div id="result"></div>
     </div>
 
-    <!-- Include Spin.js -->
-    <script src="https://cdn.jsdelivr.net/npm/spin.js@2.3.2/spin.min.js"></script>
+    <!-- Include Spin.js or Alternative Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@winwheeljs/wheel.js"></script>
     <script src="scripts/app.js"></script>
 </body>
 </html>
