@@ -1,41 +1,57 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and background */
 body {
     font-family: 'Poppins', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f0f0f0;
-    margin: 0;
+    background: #f4f4f4;
+    color: #333;
 }
 
+/* Container for the wheel and button */
 #wheel-container {
     text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    background: #fff;
 }
 
+/* Style for the wheel canvas */
 #wheel {
-    border: 5px solid #333;
+    border: 4px solid #ddd;
     border-radius: 50%;
     margin-bottom: 20px;
 }
 
+/* Style for the Spin button */
 #spin-button {
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
     padding: 15px 30px;
-    font-size: 18px;
-    background-color: #ffcc00;
-    color: white;
+    color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
+    font-size: 18px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: transform 0.3s ease;
 }
 
 #spin-button:hover {
-    background-color: #ff9900;
+    transform: scale(1.1);
 }
 
+/* Style for the result text */
 #result {
-    font-size: 20px;
-    font-weight: bold;
-    color: #333;
     margin-top: 20px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
 }
