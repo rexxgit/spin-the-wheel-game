@@ -1,48 +1,37 @@
-// Create the wheel with added visual effects
-var theWheel = new Winwheel({
-    'numSegments': 6, // Number of segments
-    'outerRadius': 200, // Size of wheel
-    'innerRadius': 50, // Make the wheel inner radius smaller
-    'textFontSize': 24, // Larger text
-    'textAlignment': 'center', // Centered text
-    'textFillStyle': 'white',
+// Set up the Wheel with the prizes
+const wheel = new Winwheel({
+    'numSegments': 6, // Number of segments on the wheel
+    'outerRadius': 200, // Radius of the wheel
+    'innerRadius': 60, // Inner radius (for hollow middle part)
+    'textFontSize': 16, // Font size for the text
+    'textOrientation': 'curved', // Curved text
+    'textAlignment': 'center', // Center-align text
     'segments': [
-        {'fillStyle': '#FF5733', 'text': '10% OFF Shoes!'},
-        {'fillStyle': '#33FF57', 'text': '20% OFF Shoes!'},
-        {'fillStyle': '#3357FF', 'text': 'Free Shipping!'},
-        {'fillStyle': '#FF33A8', 'text': 'Free Socks with Purchase!'},
-        {'fillStyle': '#FFD700', 'text': 'Buy 1, Get 1 Free!'},
-        {'fillStyle': '#00BFFF', 'text': 'Coupon Code: WINBIG'}
+        {'fillStyle': '#ffcc00', 'text': '10% Off'},       // Discount 1
+        {'fillStyle': '#ff6666', 'text': '20% Off'},       // Discount 2
+        {'fillStyle': '#66cc66', 'text': 'Free Shipping'}, // Free Shipping
+        {'fillStyle': '#ffccff', 'text': 'BOGO Offer'},    // Buy One Get One
+        {'fillStyle': '#ccffcc', 'text': 'Summer Sale'},   // Seasonal Discount 1
+        {'fillStyle': '#ccccff', 'text': 'Winter Sale'}    // Seasonal Discount 2
     ],
     'animation': {
         'type': 'spinToStop',
-        'duration': 6,
-        'spins': 8,
-        'callbackAfter': function() {
-            // Display result once wheel stops
-            displayResult();
+        'duration': 5, // How long the spin lasts
+        'spins': 8, // Number of full spins
+        'callbackFinished': function() {
+            displayResult(wheel);
         }
     }
 });
 
-// Handle the spin button click
+// Add event listener to the spin button
 document.getElementById('spin-button').addEventListener('click', function() {
-    // Disable the button during the spin
-    document.getElementById('spin-button').disabled = true;
-    theWheel.startAnimation();
+    wheel.startAnimation();
 });
 
-// Display the prize after the spin
-function displayResult() {
-    // Enable the spin button after the spin
-    document.getElementById('spin-button').disabled = false;
-
-    // Get the winning segment
-    var winningSegment = theWheel.getIndicatedSegment();
-    document.getElementById('result').innerText = `You won: ${winningSegment.text}`;
-
-    // Optional: Add some animations for the result
-    document.getElementById('result').style.color = "#FF007F";
-    document.getElementById('result').style.fontSize = "24px";
-    document.getElementById('result').style.transition = "color 0.3s ease, font-size 0.3s ease";
+// Display the result of the spin
+function displayResult(wheel) {
+    const resultText = document.getElementById('result');
+    const winningSegment = wheel.getIndicatedSegment();
+    resultText.innerHTML = `You win: <strong>${winningSegment.text}</strong>`;
 }
