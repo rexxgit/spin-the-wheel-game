@@ -3,12 +3,15 @@ const ctx = canvas.getContext("2d");
 const spinButton = document.getElementById("spin-button");
 const resultDiv = document.getElementById("result");
 
-// Wheel sections
+// Updated Wheel sections with 'None' options
 const prizes = [
     { text: "10% OFF", color: "#ff4d4d" },
     { text: "Free Shipping", color: "#4da6ff" },
     { text: "Buy 1 Get 1", color: "#4dff4d" },
-    { text: "Seasonal Discount", color: "#ffcc00" }
+    { text: "Seasonal Discount", color: "#ffcc00" },
+    { text: "None", color: "#cccccc" }, // Additional prizes with 'None'
+    { text: "None", color: "#cccccc" },
+    { text: "None", color: "#cccccc" }
 ];
 
 const numSegments = prizes.length;
@@ -80,7 +83,7 @@ function determinePrize() {
     resultDiv.innerText = "You won: " + prizes[winningIndex].text;
 }
 
-// Initial draw
+// Initial draw call for the wheel
 drawWheel();
 
 // Ensure the button calls spinWheel()
