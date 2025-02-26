@@ -1,57 +1,47 @@
-/* Basic reset */
-* {
+/* Basic page layout */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f8f8;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
-/* Body and background */
-body {
-    font-family: 'Poppins', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: #f4f4f4;
-    color: #333;
-}
-
-/* Container for the wheel and button */
+/* Styling the container */
 #wheel-container {
     text-align: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    padding: 20px;
-    background: #fff;
+    margin-top: 50px;
 }
 
-/* Style for the wheel canvas */
+/* Styling the wheel */
 #wheel {
-    border: 4px solid #ddd;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    border: 2px solid #ccc;
     border-radius: 50%;
-    margin-bottom: 20px;
+    position: relative;
 }
 
-/* Style for the Spin button */
+/* Spin button styling */
 #spin-button {
-    background: linear-gradient(135deg, #ff7e5f, #feb47b);
-    padding: 15px 30px;
-    color: #fff;
+    background-color: #ff6600;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
     border: none;
-    border-radius: 25px;
-    font-size: 18px;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
 }
 
 #spin-button:hover {
-    transform: scale(1.1);
+    background-color: #e65c00;
 }
 
-/* Style for the result text */
+/* Result text */
 #result {
     margin-top: 20px;
-    font-size: 24px;
-    font-weight: 700;
-    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff6600;
 }
