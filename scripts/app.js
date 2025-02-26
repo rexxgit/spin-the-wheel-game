@@ -1,58 +1,84 @@
-// Define the prize options (with color and prize name)
-var prizeSegments = [
-    { label: "10% Discount", color: '#ff6666' },
-    { label: "Free Shipping", color: '#66b3ff' },
-    { label: "Buy One Get One Free", color: '#99ff99' },
-    { label: "20% Seasonal Discount", color: '#ffcc66' },
-    { label: "10% Discount", color: '#ff6666' },
-    { label: "Free Shipping", color: '#66b3ff' },
+const canvas = document.getElementById("wheel");
+const ctx = canvas.getContext("2d");
+const spinButton = document.getElementById("spin-button");
+const resultDiv = document.getElementById("result");
+
+// Wheel sections
+const prizes = [
+    { text: "10% OFF", color: "#ff4d4d" },
+    { text: "Free Shipping", color: "#4da6ff" },
+    { text: "Buy 1 Get 1", color: "#4dff4d" },
+    { text: "Seasonal Discount", color: "#ffcc00" }
 ];
 
-// Initialize Spin.js wheel options
-var opts = {
-    lines: 12, // Number of sections on the wheel
-    length: 20, // Length of each segment
-    width: 30, // Thickness of each segment
-    radius: 150, // Radius of the wheel
-    scale: 1, // Scale of the wheel
-    corners: 1, // Corner radius
-    color: '#f7f7f7', // Default segment color
-    opacity: 0.75, // Opacity of segments
-    rotate: 0, // Starting angle
-    direction: 1, // Rotation direction
-    speed: 1, // Speed of spin
-    animationDuration: 2, // Duration of animation
-    animationType: 'spin', // Spin animation
-    pinning: true, // Pin the wheel to the position
-    pins: 12, // Number of pins on the wheel
-    pinColor: '#000', // Color of the pins
-    drawText: true, // Enable text in segments
-    fontSize: 16, // Font size for segment labels
-    textColor: '#fff', // Text color in segments
-    segments: prizeSegments.map(function (segment) {
-        return {
-            fillStyle: segment.color,
-            text: segment.label,
-        };
-    }),
-};
+const numSegments = prizes.length;
+const segmentAngle = (2 * Math.PI) / numSegments;
+let currentAngle = 0;
+let spinning = false;
 
-// Create the spinner
-var spinner = new Spin(opts).spin(document.getElementById('wheel'));
+// Draw the wheel
+function drawWheel() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const radius = 180;
 
-// Button functionality to start the spin
-var spinButton = document.getElementById('spin-button');
-spinButton.addEventListener('click', function () {
-    spinner.spin(document.getElementById('wheel'));
+    for (let i = 0; i < numSegments; i++) {
+        const startAngle = currentAngle + i * segmentAngle;
+        const endAngle = startAngle + segmentAngle;
 
-    // Simulate the wheel spinning and stopping
-    setTimeout(function () {
-        spinner.stop();
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+        ctx.closePath();
+        ctx.fillStyle = prizes[i].color;
+        ctx.fill();
+        ctx.stroke();
 
-        // Get the result
-        var selectedSegment = prizeSegments[Math.floor(Math.random() * prizeSegments.length)];
+        // Text
+        ctx.fillStyle = "white";
+        ctx.font = "16px Poppins";
+        ctx.textAlign = "center";
+        ctx.save();
+        ctx.translate(centerX, centerY);
+        ctx.rotate(startAngle + segmentAngle / 2);
+        ctx.fillText(prizes[i].text, radius / 1.5, 10);
+        ctx.restore();
+    }
+}
 
-        // Show the result in the 'result' div
-        document.getElementById('result').innerText = "You won: " + selectedSegment.label;
-    }, 3000); // Stop after 3 seconds
-});
+// Spin animation
+function spinWheel() {
+    if (spinning) return;
+    spinning = true;
+
+    let spinTime = 3000; // Total spin duration
+    let startTime = null;
+    const finalRotation = Math.random() * (2 * Math.PI) + (5 * 2 * Math.PI); // Random final stop
+
+    function animateSpin(timestamp) {
+        if (!startTime) startTime = timestamp;
+        let progress = timestamp - startTime;
+
+        if (progress < spinTime) {
+            currentAngle += (finalRotation / spinTime) * (progress / 16);
+            drawWheel();
+            requestAnimationFrame(animateSpin);
+        } else {
+            currentAngle = finalRotation % (2 * Math.PI);
+            determinePrize();
+            spinning = false;
+        }
+    }
+
+    requestAnimationFrame(animateSpin);
+}
+
+// Determine the winning prize
+function determinePrize() {
+    let winningIndex = Math.floor((numSegments - (currentAngle / segmentAngle)) % numSegments);
+    resultDiv.innerText = "You won: " + prizes[winningIndex].text;
+}
+
+drawWheel();
+spinButton.addEventListener("click", spinWheel);
