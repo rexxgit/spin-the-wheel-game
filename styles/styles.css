@@ -1,11 +1,31 @@
 body {
     font-family: "Poppins", sans-serif;
     text-align: center;
-    background: linear-gradient(135deg, #ff9900, #ffcc00); /* Captivating gradient background */
+    overflow: hidden; /* Prevent scrollbars */
+}
+
+@keyframes shoe-walk {
+    0% { background-position: 0% 0; }
+    100% { background-position: -100% 0; }
+}
+
+.animated-background {
+    background-image: url('https://example.com/shoe-pattern.png'); /* Replace with your animated shoe image or GIF URL */
+    background-repeat: repeat;
+    background-size: cover; /* Adjust size as needed */
+    animation: shoe-walk 10s linear infinite;
+    position: fixed; /* Make it cover the viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensure it stays behind everything else */
 }
 
 #game-container {
     margin-top: 50px;
+    position: relative;
+    z-index: 1; /* Ensure it stays above the background */
 }
 
 #wheel-wrapper {
