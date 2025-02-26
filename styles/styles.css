@@ -1,68 +1,41 @@
-/* Basic page layout */
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f8f8f8;
-    margin: 0;
-    padding: 0;
-}
-
-/* Styling the container */
-#wheel-container {
+    font-family: "Poppins", sans-serif;
     text-align: center;
+    background-color: #f5f5f5;
+}
+
+#game-container {
     margin-top: 50px;
-    padding: 10px;
 }
 
-/* Styling the wheel */
-#wheel {
-    width: 70vw;  /* Adjust width to 70% of the viewport */
-    height: 70vw; /* Keep the wheel aspect ratio for mobile responsiveness */
-    max-width: 500px; /* Maximum width on desktop */
-    max-height: 500px; /* Maximum height on desktop */
-    margin: 0 auto;
-    border: 5px solid #ccc;
-    border-radius: 50%;
+#wheel-wrapper {
     position: relative;
-    background-color: #f7f7f7;
+    display: inline-block;
 }
 
-/* Styling the button */
-#spin-button {
+#pointer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 40px;
+    background-color: red;
+    clip-path: polygon(100% 0, 0 50%, 100% 100%);
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
     background-color: #ff6600;
     color: white;
-    padding: 15px 30px;
-    font-size: 18px;
     border: none;
     cursor: pointer;
-    margin-top: 30px;
-    transition: background-color 0.3s ease;
+    border-radius: 5px;
 }
 
-#spin-button:hover {
+button:hover {
     background-color: #e65c00;
-}
-
-/* Result text */
-#result {
-    margin-top: 20px;
-    font-size: 20px;
-    font-weight: bold;
-    color: #ff6600;
-}
-
-/* Ensuring the game fits on smaller screens */
-@media (max-width: 768px) {
-    #wheel {
-        width: 80vw;  /* Adjust wheel size on smaller screens */
-        height: 80vw; /* Adjust wheel size on smaller screens */
-    }
-
-    #spin-button {
-        font-size: 16px;
-        padding: 12px 25px;
-    }
-
-    #result {
-        font-size: 18px;
-    }
 }
