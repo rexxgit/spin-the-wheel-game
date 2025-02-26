@@ -10,27 +10,31 @@ body {
 #wheel-container {
     text-align: center;
     margin-top: 50px;
+    padding: 10px;
 }
 
 /* Styling the wheel */
 #wheel {
-    width: 150px;
-    height: 150px;
+    width: 70vw;  /* Adjust width to 70% of the viewport */
+    height: 70vw; /* Keep the wheel aspect ratio for mobile responsiveness */
+    max-width: 500px; /* Maximum width on desktop */
+    max-height: 500px; /* Maximum height on desktop */
     margin: 0 auto;
-    border: 2px solid #ccc;
+    border: 5px solid #ccc;
     border-radius: 50%;
     position: relative;
+    background-color: #f7f7f7;
 }
 
-/* Spin button styling */
+/* Styling the button */
 #spin-button {
     background-color: #ff6600;
     color: white;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 15px 30px;
+    font-size: 18px;
     border: none;
     cursor: pointer;
-    margin-top: 20px;
+    margin-top: 30px;
     transition: background-color 0.3s ease;
 }
 
@@ -41,7 +45,24 @@ body {
 /* Result text */
 #result {
     margin-top: 20px;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     color: #ff6600;
+}
+
+/* Ensuring the game fits on smaller screens */
+@media (max-width: 768px) {
+    #wheel {
+        width: 80vw;  /* Adjust wheel size on smaller screens */
+        height: 80vw; /* Adjust wheel size on smaller screens */
+    }
+
+    #spin-button {
+        font-size: 16px;
+        padding: 12px 25px;
+    }
+
+    #result {
+        font-size: 18px;
+    }
 }
