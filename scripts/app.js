@@ -1,32 +1,45 @@
-// Initialize the wheel with options (Discounts, Free Shipping, etc.)
-let wheel = new Winwheel({
-    'numSegments': 6,        // 6 segments on the wheel
-    'outerRadius': 200,      // Radius of the wheel
-    'innerRadius': 40,       // Hollow in the center
-    'textFontSize': 16,      // Font size for text
-    'textAlignment': 'center', // Text alignment
-    'segments': [
-        { 'fillStyle': '#FF5733', 'text': '10% OFF' },   // Segment 1
-        { 'fillStyle': '#33FF57', 'text': 'Free Shipping' }, // Segment 2
-        { 'fillStyle': '#3357FF', 'text': 'Buy 1 Get 1' },  // Segment 3
-        { 'fillStyle': '#FF33A5', 'text': '15% OFF' },     // Segment 4
-        { 'fillStyle': '#33A5FF', 'text': 'Free Shipping' }, // Segment 5
-        { 'fillStyle': '#A533FF', 'text': '20% OFF' },      // Segment 6
-    ],
-    'animation': {
-        'type': 'spinToStop',     // Animation type
-        'duration': 5,            // Duration of spin in seconds
-        'spins': 8                // Number of spins
-    }
-});
+// Define the options for the Spin.js spinner
+var opts = {
+    lines: 12, // Number of lines
+    length: 0, // Length of each line
+    width: 10, // Line thickness
+    radius: 30, // Radius of the spinner
+    scale: 1, // Scale of the spinner
+    corners: 1, // Rounding of corners
+    color: '#ff6600', // Spinner color
+    fadeColor: 'transparent', // Fade color of the spinner
+    animation: 'spin', // Spinner animation style
+    speed: 1, // Spinner speed
+    rotate: 0, // Rotation angle of the spinner
+    animationDuration: 2, // Animation duration
+    direction: 1, // Clockwise or counterclockwise direction
+    zIndex: 2e9, // z-index of the spinner
+    top: '50%', // Positioning
+    left: '50%', // Positioning
+};
 
-// Add event listener to the Spin button
-document.getElementById('spin-button').addEventListener('click', function () {
-    wheel.startAnimation();  // Start the spin animation
-});
+// Create a spinner instance
+var spinner = new Spinner(opts);
 
-// This function will show the result of the spin
-wheel.animation.callback = function () {
-    let resultText = wheel.getIndicatedSegment().text;
-    document.getElementById('result').innerHTML = `You won: ${resultText}`;
-}
+// Get the container element
+var wheelContainer = document.getElementById('wheel');
+
+// Button to start the spin
+var spinButton = document.getElementById('spin-button');
+spinButton.addEventListener('click', function () {
+    spinner.spin(wheelContainer);
+
+    // Simulate the wheel spinning and stopping
+    setTimeout(function () {
+        spinner.stop();
+        // Random result generation after the spin stops
+        var resultMessages = [
+            'You won a 10% Discount!',
+            'You won Free Shipping!',
+            'You won Buy One Get One Free!',
+            'You won a 20% Seasonal Discount!',
+        ];
+        var randomResult = resultMessages[Math.floor(Math.random() * resultMessages.length)];
+        document.getElementById('result').innerText = randomResult;
+    }, 3000); // Stop after 3 seconds
+});
