@@ -3,15 +3,19 @@ const ctx = canvas.getContext("2d");
 const spinButton = document.getElementById("spin-button");
 const resultDiv = document.getElementById("result");
 
-// Updated Wheel sections with 'None' options
+// Adjusted prize probability
 const prizes = [
+    { text: "Free Shipping", color: "#28a745" }, // High probability
+    { text: "Free Shipping", color: "#28a745" },
+    { text: "Free Shipping", color: "#28a745" },
+    { text: "10% OFF", color: "#ff4d4d" },       // Mid to high probability
     { text: "10% OFF", color: "#ff4d4d" },
-    { text: "Free Shipping", color: "#4da6ff" },
-    { text: "Buy 1 Get 1", color: "#4dff4d" },
-    { text: "Seasonal Discount", color: "#ffcc00" },
-    { text: "None", color: "#cccccc" }, // Additional prizes with 'None'
+    { text: "Seasonal Discount", color: "#ffbd33" },  // Medium probability
+    { text: "Seasonal Discount", color: "#ffbd33" },
+    { text: "None", color: "#cccccc" },          // Lower winning frequency
     { text: "None", color: "#cccccc" },
-    { text: "None", color: "#cccccc" }
+    { text: "None", color: "#cccccc" },
+    { text: "Free Shoes", color: "#0000ff" }     // Extremely low probability
 ];
 
 const numSegments = prizes.length;
@@ -19,7 +23,6 @@ const segmentAngle = (2 * Math.PI) / numSegments;
 let currentAngle = 0;
 let spinning = false;
 
-// Draw the wheel
 function drawWheel() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     const centerX = canvas.width / 2;
@@ -50,12 +53,11 @@ function drawWheel() {
     }
 }
 
-// Spin animation
 function spinWheel() {
     if (spinning) return;
     spinning = true;
 
-    let spinTime = 3000; // Total spin duration
+    let spinTime = 5000; // Slow down the total spin duration to 5 seconds
     let startTime = null;
     const finalRotation = Math.random() * (2 * Math.PI) + (5 * 2 * Math.PI); // Random final stop
 
@@ -77,14 +79,11 @@ function spinWheel() {
     requestAnimationFrame(animateSpin);
 }
 
-// Determine the winning prize
 function determinePrize() {
     let winningIndex = Math.floor((numSegments - (currentAngle / segmentAngle)) % numSegments);
     resultDiv.innerText = "You won: " + prizes[winningIndex].text;
 }
 
-// Initial draw call for the wheel
 drawWheel();
 
-// Ensure the button calls spinWheel()
 spinButton.addEventListener("click", spinWheel);
