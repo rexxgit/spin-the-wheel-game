@@ -1,62 +1,51 @@
-/* General body styling */
+/* General Page Styling */
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #ff4e50, #f9d423);
-    height: 100vh;
-    margin: 0;
+    background-color: #f8f8f8;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
-/* Container for the game */
+/* Wheel Container Styling */
 #wheel-container {
     text-align: center;
-    background-color: #fff;
-    border-radius: 15px;
-    padding: 50px;
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
-    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    background-color: white;
+    padding: 30px;
+    width: 400px;
 }
 
 /* Spin Button Styling */
 #spin-button {
-    background-color: #ff007f;
+    background-color: #ff9900;
     color: white;
     font-size: 18px;
     padding: 15px 30px;
     border: none;
+    border-radius: 8px;
+    margin-top: 20px;
     cursor: pointer;
-    border-radius: 50px;
-    transition: transform 0.3s ease;
+    transition: background-color 0.3s;
 }
 
 #spin-button:hover {
-    background-color: #d4006b;
-    transform: scale(1.1);
+    background-color: #ff6600;
 }
 
-/* Result text styling */
+/* Result Display Styling */
 #result {
+    font-size: 18px;
     margin-top: 20px;
-    font-size: 20px;
-    color: #333;
     font-weight: bold;
 }
 
-/* Wheel Canvas Styles */
-#wheel {
-    border-radius: 50%;
-    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
-}
-
-/* Responsive Design */
-@media (max-width: 600px) {
-    #wheel-container {
-        padding: 30px;
-    }
-    #spin-button {
-        font-size: 16px;
-        padding: 10px 20px;
-    }
+/* Wheel Styling */
+canvas {
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    margin-bottom: 20px;
 }
