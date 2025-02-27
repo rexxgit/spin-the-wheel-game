@@ -9,6 +9,7 @@ body, html {
     align-items: center;
     height: 100vh;
     color: white;
+    font-family: Arial, sans-serif;
 }
 
 .wheel-container {
@@ -16,14 +17,15 @@ body, html {
     width: 400px;
     height: 400px;
     transform-style: preserve-3d;
-    perspective: 1000px; /* 3D Perspective */
+    perspective: 1000px;
+    transform: rotateX(0deg) rotateY(0deg);
 }
 
 canvas {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
 }
 
 #spin-button {
@@ -31,18 +33,48 @@ canvas {
     top: 85%;
     left: 50%;
     transform: translateX(-50%);
-    padding: 10px 20px;
+    padding: 12px 25px;
     background-color: #ff4d4d;
     color: white;
     border: none;
-    font-size: 16px;
+    font-size: 18px;
     cursor: pointer;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
 
 #spin-button:hover {
     background-color: #ff3333;
+}
+
+#result {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.popup {
+    display: none;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #28a745;
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+.popup-message {
+    padding: 20px;
 }
 
 @media screen and (max-width: 768px) {
@@ -52,7 +84,7 @@ canvas {
     }
 
     #spin-button {
-        font-size: 14px;
-        padding: 8px 15px;
+        font-size: 16px;
+        padding: 10px 20px;
     }
 }
